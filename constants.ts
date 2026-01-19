@@ -1,6 +1,6 @@
 import { UserProfile, ClassSession, CampusEvent, TodoItem, LocketItem } from './types';
 
-export const FTU_LOGO_URL = "../assets/logo.jpeg";
+export const FTU_LOGO_URL = "../public/images/logo.jpeg";
 
 export const INITIAL_USER: UserProfile = {
   id: 'u123',

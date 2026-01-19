@@ -35,11 +35,11 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
       
       {/* 1. Logo Section */}
       <div className="mb-12 relative">
-        <div className="w-36 h-36 rounded-full bg-white shadow-xl shadow-emerald-100 flex items-center justify-center p-2 border-4 border-emerald-50 relative z-10">
+        <div className="w-36 h-36 rounded-full bg-white shadow-xl shadow-emerald-100 flex items-center justify-center border-4 border-emerald-50 relative z-10 overflow-hidden">
            <img 
              src={FTU_LOGO_URL} 
              alt="FTU Logo" 
-             className="w-full h-full object-contain"
+             className="w-full h-full object-cover"
            />
         </div>
         {/* Glow effect behind logo */}
