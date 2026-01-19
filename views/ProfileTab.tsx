@@ -54,7 +54,7 @@ const ProfileTab: React.FC = () => {
                 </p>
                 <div className="flex items-center text-blue-500">
                   <Calendar size={10} className="mr-1" />
-                  <p className="text-[10px] font-medium">Thứ 2, 19 Tháng 01</p>
+                  <p className="text-[10px] font-medium">Thứ 3, 20 Tháng 01</p>
                 </div>
             </div>
             <span className="px-2 py-0.5 bg-pink-50 text-pink-500 text-[10px] font-bold rounded-full border border-pink-100">FTU ID</span>

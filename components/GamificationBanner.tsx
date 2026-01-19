@@ -24,11 +24,11 @@ const GamificationBanner: React.FC = () => {
           {/* Header Row: Logo & Info */}
           <div className="flex items-center gap-3 mb-3">
               {/* Logo */}
-              <div className="w-10 h-10 shrink-0">
+              <div className="w-10 h-10 rounded-full bg-white p-0.5 shadow-md shrink-0 border-2 border-emerald-400/30">
                  <img 
                    src={FTU_LOGO_URL} 
                    alt="FTU" 
-                   className="w-full h-full object-cover rounded-full drop-shadow-md" 
+                   className="w-full h-full object-contain" 
                  />
               </div>
 

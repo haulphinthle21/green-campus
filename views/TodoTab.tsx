@@ -318,12 +318,10 @@ const TaskItem: React.FC<{
            {/* Content */}
            <div className="flex-1 min-w-0">
               <h4 className="text-xs font-bold text-gray-900 leading-snug">{todo.text}</h4>
-              {todo.isGreenTask ? (
+              {todo.isGreenTask && (
                  <div className="mt-1 flex items-center text-[10px] text-gray-500">
                     <span>Chụp realtime để cộng điểm</span>
                  </div>
-              ) : (
-                 <p className="text-[10px] text-gray-400 mt-0.5 truncate">Ghi insight + pain points</p>
               )}
               {todo.isGreenTask && (
                  <div className="mt-1.5 flex items-center text-[9px] text-gray-400 font-medium">

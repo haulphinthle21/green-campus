@@ -131,8 +131,8 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
               <div>
                 <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Lịch học trong tuần</h2>
                 <div className="flex items-center gap-2 mt-1">
-                   <span className="text-xs font-medium text-slate-500">Tuần 14</span>
-                   <span className="text-[10px] font-medium text-slate-400 bg-gray-100 px-1.5 py-0.5 rounded">[03/11 - 09/11]</span>
+                   <span className="text-xs font-medium text-slate-500">Tuần 02</span>
+                   <span className="text-[10px] font-medium text-slate-400 bg-gray-100 px-1.5 py-0.5 rounded">[19/01 - 25/01]</span>
                 </div>
               </div>
               <button className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors">
@@ -143,7 +143,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
           <div className="bg-white rounded-2xl shadow-[0_4px_16px_-4px_rgba(0,0,0,0.05)] border border-gray-200 overflow-hidden">
              {/* Controls */}
              <div className="flex border-b border-gray-100 p-2 bg-gray-50/30 gap-2">
-                <div className="flex-1 bg-white border border-gray-200 rounded-lg h-7 px-2 flex items-center text-[10px] text-gray-600 font-medium">Học kỳ 1 - 2025</div>
+                <div className="flex-1 bg-white border border-gray-200 rounded-lg h-7 px-2 flex items-center text-[10px] text-gray-600 font-medium">Học kỳ 2 - 2025-2026</div>
                 <div className="w-20 bg-emerald-50 border border-emerald-100 rounded-lg h-7 flex items-center justify-center text-[10px] text-emerald-600 font-bold gap-1 cursor-pointer hover:bg-emerald-100">
                    <Printer size={10} /> In lịch
                 </div>
@@ -157,9 +157,9 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                     <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5 mb-0.5">
                        <div className="bg-gray-100/80 rounded flex items-center justify-center text-[9px] font-bold text-gray-500 h-8">Tiết</div>
                        {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d, i) => (
-                           <div key={d} className={`rounded flex flex-col items-center justify-center h-8 ${i === 0 ? 'bg-emerald-50/60' : 'bg-gray-50'}`}>
-                              <span className={`text-[10px] font-bold ${i === 0 ? 'text-emerald-600' : 'text-gray-700'}`}>{d}</span>
-                              <span className="text-[8px] text-gray-400 font-medium">0{3+i}/11</span>
+                           <div key={d} className={`rounded flex flex-col items-center justify-center h-8 ${i === 1 ? 'bg-emerald-50/60' : 'bg-gray-50'}`}>
+                              <span className={`text-[10px] font-bold ${i === 1 ? 'text-emerald-600' : 'text-gray-700'}`}>{d}</span>
+                              <span className="text-[8px] text-gray-400 font-medium">{19+i}/01</span>
                            </div>
                        ))}
                     </div>
