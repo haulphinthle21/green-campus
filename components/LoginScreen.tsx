@@ -25,16 +25,17 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       
       {/* Logo Container */}
       <div className="mb-6 flex flex-col items-center">
-        <div className="w-40 h-40 rounded-full bg-emerald-50/50 flex items-center justify-center mb-4 relative overflow-visible border-4 border-emerald-50">
-            {/* Using the constant logo */}
+        {/* Updated: Added overflow-hidden, removed overflow-visible, set object-cover */}
+        <div className="w-40 h-40 rounded-full bg-emerald-50/50 flex items-center justify-center mb-4 relative border-4 border-emerald-50 overflow-hidden shadow-lg shadow-emerald-100/50">
+            {/* Using the constant logo with cover fit */}
             <img 
               src={FTU_LOGO_URL} 
               alt="FTU Logo" 
-              className="w-full h-full object-contain drop-shadow-sm transform scale-110"
+              className="w-full h-full object-cover"
             />
         </div>
         <h1 className="text-xl font-extrabold text-emerald-900 tracking-wide uppercase mt-2">
-          FTU GREEN CAMPUS
+          FTU2 GREEN CAMPUS
         </h1>
       </div>
 

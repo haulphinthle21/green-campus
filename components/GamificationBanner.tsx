@@ -23,18 +23,18 @@ const GamificationBanner: React.FC = () => {
        <div className="relative z-10">
           {/* Header Row: Logo & Info */}
           <div className="flex items-center gap-3 mb-3">
-              {/* Logo */}
-              <div className="w-10 h-10 rounded-full bg-white p-0.5 shadow-md shrink-0 border-2 border-emerald-400/30">
+              {/* Logo - Updated to be full circle crop */}
+              <div className="w-10 h-10 rounded-full bg-white shadow-md shrink-0 border-2 border-emerald-400/30 overflow-hidden">
                  <img 
                    src={FTU_LOGO_URL} 
                    alt="FTU" 
-                   className="w-full h-full object-contain" 
+                   className="w-full h-full object-cover" 
                  />
               </div>
 
               {/* Text Info */}
               <div className="flex-1">
-                 <p className="text-[9px] font-bold opacity-80 uppercase tracking-wider text-emerald-100 mb-0.5">FTU Green Campus</p>
+                 <p className="text-[9px] font-bold opacity-80 uppercase tracking-wider text-emerald-100 mb-0.5">FTU2 Green Campus</p>
                  <h3 className="font-bold text-base leading-tight">Tiến độ điểm rèn luyện</h3>
                  <p className="text-[10px] font-medium text-emerald-100 mt-0.5 opacity-90">
                     Đạt <span className="text-white font-bold">{nextLevel} điểm</span> để cộng <span className="text-yellow-300 font-bold">+5 ĐRL</span>

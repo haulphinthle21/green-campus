@@ -80,23 +80,24 @@ const AppContent: React.FC = () => {
   );
 };
 
+type AppFlowState = 'LOGIN' | 'LOADING' | 'APP';
+
 const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [flowState, setFlowState] = useState<AppFlowState>('LOGIN');
 
-  // 1. Show Loading Screen first
-  if (isLoading) {
-    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  // 1. Login Screen
+  if (flowState === 'LOGIN') {
+    return <LoginScreen onLogin={() => setFlowState('LOADING')} />;
   }
 
-  // 2. Show Login Screen second
-  if (!isLoggedIn) {
-    return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
+  // 2. Loading Screen
+  if (flowState === 'LOADING') {
+    return <LoadingScreen onComplete={() => setFlowState('APP')} />;
   }
 
-  // 3. Show Main App
+  // 3. Main App
   return (
-    <AppProvider onLogout={() => setIsLoggedIn(false)}>
+    <AppProvider onLogout={() => setFlowState('LOGIN')}>
       <AppContent />
     </AppProvider>
   );

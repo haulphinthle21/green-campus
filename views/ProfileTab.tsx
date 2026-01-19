@@ -68,7 +68,7 @@ const ProfileTab: React.FC = () => {
                 <div className="w-6 h-6 rounded-full bg-pink-100 flex items-center justify-center mr-2">
                    <User size={12} className="text-pink-600" />
                 </div>
-                <h3 className="font-bold text-xs text-gray-800">Thông tin sinh viên</h3>
+                <h3 className="font-bold text-xs text-gray-800">Thông tin cá nhân</h3>
             </div>
             
             <div className="flex gap-4 mb-4">
@@ -116,7 +116,7 @@ const ProfileTab: React.FC = () => {
                 <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center mr-2">
                    <GraduationCap size={12} className="text-orange-600" />
                 </div>
-                <h3 className="font-bold text-xs text-gray-800">Thông tin khóa học</h3>
+                <h3 className="font-bold text-xs text-gray-800">Thông tin sinh viên</h3>
             </div>
             
             <div className="space-y-2 mb-2">

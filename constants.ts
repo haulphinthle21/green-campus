@@ -1,6 +1,6 @@
 import { UserProfile, ClassSession, CampusEvent, TodoItem, LocketItem } from './types';
 
-export const FTU_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Logo_Truong_Dai_hoc_Ngoai_thuong.png/600px-Logo_Truong_Dai_hoc_Ngoai_thuong.png";
+export const FTU_LOGO_URL = "https://lh3.googleusercontent.com/pw/AP1GczMl0sGR5a81GOdhxboKl3rn5rLJSz3QHOD05eaYFDPl_6dnYn6lVCFrZVVWMmOHIHPaxjGDgN-B95vFdGVFqlbXLkE_OHs-c3ZK6ZAlIeloYb8YD6gFqrrSzKZBEfF9mCoWgT-tCB_9GxpBgI-apTr6=w878-h878-s-no-gm?authuser=0";
 
 export const INITIAL_USER: UserProfile = {
   id: 'u123',
