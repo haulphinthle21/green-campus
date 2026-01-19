@@ -16,32 +16,32 @@ export const INITIAL_CLASSES: ClassSession[] = [
     id: 'c1',
     courseCode: 'DES101',
     name: 'Tư Duy Thiết Kế',
-    location: 'B201',
-    startTime: '07:00',
+    location: 'CS2.A502',
+    startTime: '06:45',
     endTime: '09:00',
     day: 'Today',
     type: 'Lecture',
-    points: 18
+    points: 20
   },
   {
     id: 'c2',
-    courseCode: 'MKT201',
-    name: 'Marketing Quốc Tế',
-    location: 'B201',
-    startTime: '09:10',
-    endTime: '11:00',
+    courseCode: 'IBE201',
+    name: 'Giao dịch TMQT',
+    location: 'CS2.A206',
+    startTime: '09:15',
+    endTime: '11:30',
     day: 'Today',
-    type: 'Seminar',
-    points: 14
+    type: 'Lecture',
+    points: 15
   },
   {
     id: 'c3',
-    courseCode: 'ENG301',
-    name: 'Business English',
-    location: 'D202',
-    startTime: '13:00',
-    endTime: '15:25',
-    day: 'Tomorrow',
+    courseCode: 'IBE301',
+    name: 'Chính sách TMQT',
+    location: 'CS2.A305',
+    startTime: '12:30',
+    endTime: '14:45',
+    day: 'Today',
     type: 'Lecture',
     points: 15
   }
@@ -78,21 +78,21 @@ export const INITIAL_TODOS: TodoItem[] = [
   {
     id: 't1',
     courseCode: 'DES101',
-    text: 'Note bài',
+    text: 'Nghe giảng của thầy Kelvin đẹp trai, dấu iu',
     isCompleted: false,
     isGreenTask: false
   },
   {
     id: 't2',
-    courseCode: 'DES101',
-    text: 'Làm bài tập empathy',
+    courseCode: 'IBE201',
+    text: 'Đọc chương 4: Incoterms 2020',
     isCompleted: false,
     isGreenTask: false
   },
   {
     id: 't3',
     courseCode: 'DES101',
-    text: 'Không mua đồ nhựa sau break',
+    text: 'Không sử dụng ống hút nhựa',
     isCompleted: false,
     isGreenTask: true
   }

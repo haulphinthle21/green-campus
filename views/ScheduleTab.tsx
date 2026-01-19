@@ -173,42 +173,30 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                <span className="opacity-70 text-[8px] mt-0.5">06:45</span>
                             </div>
                             
-                            {/* T2: Empty */}
-                            <div className="bg-gray-50/30 rounded"></div>
-                            
-                            {/* T3: Class */}
+                            {/* T2: Tư duy thiết kế (MOVED HERE) */}
                             <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden group">
                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
                                <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Kinh tế lượng</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B401</p>
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A502</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">06:45 - 09:00</span>
+                            </div>
+                            
+                            <div className="bg-gray-50/30 rounded"></div>
+                            
+                            {/* T4: Tư duy thiết kế */}
+                             <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden group">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B402</p>
                                </div>
                                <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">06:45 - 09:00</span>
                             </div>
 
-                            {/* T4: Empty */}
                             <div className="bg-gray-50/30 rounded"></div>
-
-                            {/* T5: Class */}
-                            <div className="bg-purple-50 border border-purple-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-purple-900 leading-tight line-clamp-2">Kinh tế lượng (Bù)</p>
-                                  <p className="text-[8px] text-purple-700 mt-0.5 font-medium">CS2.B402</p>
-                               </div>
-                               <span className="text-[7px] text-purple-500 pl-1.5 font-mono mb-0.5">06:45 - 09:00</span>
-                            </div>
-
-                            {/* T6: Class */}
-                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Kinh tế lượng</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B401</p>
-                               </div>
-                            </div>
-
-                             {/* T7, CN */}
+                            <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
                         </div>
@@ -220,7 +208,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                <span className="opacity-70 text-[8px] mt-0.5">09:15</span>
                             </div>
                             
-                            {/* T2: Class */}
+                            {/* T2: Giao dịch TMQT */}
                             <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
                                <div className="pl-1.5 pt-0.5">
@@ -232,7 +220,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                             
                             <div className="bg-gray-50/30 rounded"></div>
 
-                             {/* T4: Class */}
+                             {/* T4: Giao dịch TMQT */}
                             <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
                                <div className="pl-1.5 pt-0.5">
@@ -242,15 +230,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">09:15 - 11:30</span>
                             </div>
 
-                            {/* T5: Class */}
-                            <div className="bg-purple-50 border border-purple-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-purple-900 leading-tight line-clamp-2">Kinh tế lượng (Bù)</p>
-                                  <p className="text-[8px] text-purple-700 mt-0.5 font-medium">CS2.B402</p>
-                               </div>
-                            </div>
-
+                            <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
@@ -263,7 +243,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                <span className="opacity-70 text-[8px] mt-0.5">12:30</span>
                             </div>
                             
-                            {/* T2: Class */}
+                            {/* T2: Chính sách TMQT */}
                             <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
                                <div className="pl-1.5 pt-0.5">
@@ -275,7 +255,7 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                             
                             <div className="bg-gray-50/30 rounded"></div>
 
-                             {/* T4: Class */}
+                             {/* T4: Chính sách TMQT */}
                             <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
                                <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
                                <div className="pl-1.5 pt-0.5">
@@ -284,25 +264,9 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                </div>
                             </div>
 
-                            {/* T5: Class */}
-                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">TM Điện tử</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A402</p>
-                               </div>
-                            </div>
-
+                            <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
-                             
-                             {/* T7: Class */}
-                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">TM Điện tử</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A402</p>
-                               </div>
-                            </div>
+                             <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>
                         </div>
 
@@ -313,27 +277,13 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                                <span className="opacity-70 text-[8px] mt-0.5">15:00</span>
                             </div>
                             
-                            {/* T2: Class */}
-                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A502</p>
-                               </div>
-                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">15:00 - 17:15</span>
-                            </div>
+                            {/* Empty T2 */}
+                            <div className="bg-gray-50/30 rounded"></div>
                             
                             <div className="bg-gray-50/30 rounded"></div>
 
-                             {/* T4: Class */}
-                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
-                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                               <div className="pl-1.5 pt-0.5">
-                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
-                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B402</p>
-                               </div>
-                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">15:00 - 17:15</span>
-                            </div>
+                             {/* Empty T4 */}
+                            <div className="bg-gray-50/30 rounded"></div>
 
                             <div className="bg-gray-50/30 rounded"></div>
                              <div className="bg-gray-50/30 rounded"></div>

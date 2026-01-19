@@ -18,7 +18,7 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppProvider: React.FC<{ children: React.ReactNode; onLogout: () => void }> = ({ children, onLogout }) => {
   const [state, setState] = useState<AppState>(() => {
     // Try to load from local storage
     try {
@@ -150,7 +150,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const resetData = () => {
     localStorage.removeItem('ftu_green_app_v1');
-    window.location.reload();
+    onLogout();
   };
 
   return (

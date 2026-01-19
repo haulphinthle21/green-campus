@@ -8,6 +8,7 @@ import TodoTab from './views/TodoTab';
 import ImpactTab from './views/ImpactTab';
 import ProfileTab from './views/ProfileTab';
 import LoadingScreen from './components/LoadingScreen';
+import LoginScreen from './components/LoginScreen';
 import { useApp } from './services/appContext';
 
 // Inner component to use the hook
@@ -81,13 +82,21 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // 1. Show Loading Screen first
   if (isLoading) {
     return <LoadingScreen onComplete={() => setIsLoading(false)} />;
   }
 
+  // 2. Show Login Screen second
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
+  }
+
+  // 3. Show Main App
   return (
-    <AppProvider>
+    <AppProvider onLogout={() => setIsLoggedIn(false)}>
       <AppContent />
     </AppProvider>
   );
