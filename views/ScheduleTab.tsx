@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../services/appContext';
-import { Clock, MapPin, Zap, Plus, Leaf, Award, CalendarPlus } from 'lucide-react';
+import { Clock, MapPin, Zap, Plus, Leaf, Award, CalendarPlus, ChevronRight, Grid, Printer } from 'lucide-react';
 import GamificationBanner from '../components/GamificationBanner';
 
 interface ScheduleTabProps {
@@ -12,9 +12,6 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
   const { state, selectClass, getClassesForDay, joinEvent } = useApp();
   
   const todayClasses = getClassesForDay('Today');
-  
-  // Requirement: "Integrated over to 'schedule' when I press 'add to schedule'"
-  // We filter by joined === true to only show events that the user has explicitly added.
   const todayEvents = state.events.filter(e => e.date === 'Today' && e.joined);
 
   return (
@@ -116,7 +113,6 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                        {event.description}
                      </p>
 
-                     {/* Requirement: Removed Button, Changed Tag Text */}
                      <div>
                         <div className="w-full px-3 py-2.5 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center justify-center shadow-sm">
                            <Leaf size={14} className="text-emerald-600 mr-2" />
@@ -126,6 +122,233 @@ const ScheduleTab: React.FC<ScheduleTabProps> = ({ onNavigateToTodo, onNavigateT
                   </div>
                ))
              )}
+          </div>
+        </section>
+
+        {/* 4. Weekly Schedule Grid */}
+        <section className="pb-4">
+          <div className="flex justify-between items-end mb-4 px-1">
+              <div>
+                <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Lịch học trong tuần</h2>
+                <div className="flex items-center gap-2 mt-1">
+                   <span className="text-xs font-medium text-slate-500">Tuần 14</span>
+                   <span className="text-[10px] font-medium text-slate-400 bg-gray-100 px-1.5 py-0.5 rounded">[03/11 - 09/11]</span>
+                </div>
+              </div>
+              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors">
+                 <ChevronRight size={16} />
+              </button>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-[0_4px_16px_-4px_rgba(0,0,0,0.05)] border border-gray-200 overflow-hidden">
+             {/* Controls */}
+             <div className="flex border-b border-gray-100 p-2 bg-gray-50/30 gap-2">
+                <div className="flex-1 bg-white border border-gray-200 rounded-lg h-7 px-2 flex items-center text-[10px] text-gray-600 font-medium">Học kỳ 1 - 2025</div>
+                <div className="w-20 bg-emerald-50 border border-emerald-100 rounded-lg h-7 flex items-center justify-center text-[10px] text-emerald-600 font-bold gap-1 cursor-pointer hover:bg-emerald-100">
+                   <Printer size={10} /> In lịch
+                </div>
+             </div>
+
+             {/* Scrollable Table Container */}
+             <div className="overflow-x-auto no-scrollbar relative">
+                <div className="min-w-[650px] bg-white p-1"> 
+                    
+                    {/* Header Row */}
+                    <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5 mb-0.5">
+                       <div className="bg-gray-100/80 rounded flex items-center justify-center text-[9px] font-bold text-gray-500 h-8">Tiết</div>
+                       {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d, i) => (
+                           <div key={d} className={`rounded flex flex-col items-center justify-center h-8 ${i === 0 ? 'bg-emerald-50/60' : 'bg-gray-50'}`}>
+                              <span className={`text-[10px] font-bold ${i === 0 ? 'text-emerald-600' : 'text-gray-700'}`}>{d}</span>
+                              <span className="text-[8px] text-gray-400 font-medium">0{3+i}/11</span>
+                           </div>
+                       ))}
+                    </div>
+                    
+                    {/* Grid Rows */}
+                    <div className="space-y-0.5">
+                        {/* Morning 1 */}
+                        <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5">
+                            <div className="bg-[#059669] rounded text-white font-bold text-[9px] flex flex-col items-center justify-center py-2 h-20 shadow-sm">
+                               <span>Tiết 1</span>
+                               <span className="opacity-70 text-[8px] mt-0.5">06:45</span>
+                            </div>
+                            
+                            {/* T2: Empty */}
+                            <div className="bg-gray-50/30 rounded"></div>
+                            
+                            {/* T3: Class */}
+                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden group">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Kinh tế lượng</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B401</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">06:45 - 09:00</span>
+                            </div>
+
+                            {/* T4: Empty */}
+                            <div className="bg-gray-50/30 rounded"></div>
+
+                            {/* T5: Class */}
+                            <div className="bg-purple-50 border border-purple-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-purple-900 leading-tight line-clamp-2">Kinh tế lượng (Bù)</p>
+                                  <p className="text-[8px] text-purple-700 mt-0.5 font-medium">CS2.B402</p>
+                               </div>
+                               <span className="text-[7px] text-purple-500 pl-1.5 font-mono mb-0.5">06:45 - 09:00</span>
+                            </div>
+
+                            {/* T6: Class */}
+                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Kinh tế lượng</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B401</p>
+                               </div>
+                            </div>
+
+                             {/* T7, CN */}
+                             <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                        </div>
+
+                        {/* Morning 2 */}
+                        <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5">
+                            <div className="bg-[#059669] rounded text-white font-bold text-[9px] flex flex-col items-center justify-center py-2 h-20 shadow-sm">
+                               <span>Tiết 4</span>
+                               <span className="opacity-70 text-[8px] mt-0.5">09:15</span>
+                            </div>
+                            
+                            {/* T2: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Giao dịch TMQT</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A206</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">09:15 - 11:30</span>
+                            </div>
+                            
+                            <div className="bg-gray-50/30 rounded"></div>
+
+                             {/* T4: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Giao dịch TMQT</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B402</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">09:15 - 11:30</span>
+                            </div>
+
+                            {/* T5: Class */}
+                            <div className="bg-purple-50 border border-purple-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-purple-900 leading-tight line-clamp-2">Kinh tế lượng (Bù)</p>
+                                  <p className="text-[8px] text-purple-700 mt-0.5 font-medium">CS2.B402</p>
+                               </div>
+                            </div>
+
+                             <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                        </div>
+
+                         {/* Afternoon 1 */}
+                        <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5">
+                            <div className="bg-[#059669] rounded text-white font-bold text-[9px] flex flex-col items-center justify-center py-2 h-20 shadow-sm">
+                               <span>Tiết 7</span>
+                               <span className="opacity-70 text-[8px] mt-0.5">12:30</span>
+                            </div>
+                            
+                            {/* T2: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Chính sách TMQT</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A305</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">12:30 - 14:45</span>
+                            </div>
+                            
+                            <div className="bg-gray-50/30 rounded"></div>
+
+                             {/* T4: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Chính sách TMQT</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A503</p>
+                               </div>
+                            </div>
+
+                            {/* T5: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">TM Điện tử</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A402</p>
+                               </div>
+                            </div>
+
+                             <div className="bg-gray-50/30 rounded"></div>
+                             
+                             {/* T7: Class */}
+                            <div className="bg-blue-50 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-400"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">TM Điện tử</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A402</p>
+                               </div>
+                            </div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                        </div>
+
+                        {/* Afternoon 2 */}
+                        <div className="grid grid-cols-[50px_repeat(7,1fr)] gap-0.5">
+                            <div className="bg-[#059669] rounded text-white font-bold text-[9px] flex flex-col items-center justify-center py-2 h-20 shadow-sm">
+                               <span>Tiết 10</span>
+                               <span className="opacity-70 text-[8px] mt-0.5">15:00</span>
+                            </div>
+                            
+                            {/* T2: Class */}
+                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.A502</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">15:00 - 17:15</span>
+                            </div>
+                            
+                            <div className="bg-gray-50/30 rounded"></div>
+
+                             {/* T4: Class */}
+                            <div className="bg-blue-100 border border-blue-200 rounded p-1 flex flex-col justify-between h-20 relative overflow-hidden">
+                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                               <div className="pl-1.5 pt-0.5">
+                                  <p className="text-[9px] font-bold text-blue-900 leading-tight line-clamp-2">Tư duy thiết kế</p>
+                                  <p className="text-[8px] text-blue-700 mt-0.5 font-medium">CS2.B402</p>
+                               </div>
+                               <span className="text-[7px] text-blue-500 pl-1.5 font-mono mb-0.5">15:00 - 17:15</span>
+                            </div>
+
+                            <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                             <div className="bg-gray-50/30 rounded"></div>
+                        </div>
+
+                    </div>
+                </div>
+             </div>
+             
+             {/* Hint */}
+             <div className="bg-gray-50 py-1.5 text-center border-t border-gray-100">
+                <span className="text-[9px] text-gray-400 italic">Vuốt ngang để xem chi tiết lịch học</span>
+             </div>
           </div>
         </section>
 

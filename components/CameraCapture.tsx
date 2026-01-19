@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { X, Check, RefreshCw, Zap } from 'lucide-react';
+import { X, Check, RefreshCw, Zap, ShieldCheck } from 'lucide-react';
 
 interface CameraCaptureProps {
-  onCapture: (imageSrc: string) => void;
+  onCapture: (imageSrc: string, requireApproval: boolean) => void;
   onClose: () => void;
 }
 
@@ -12,6 +12,9 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, onClose }) => 
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [error, setError] = useState<string>('');
+  
+  // State for Approval Option
+  const [requireApproval, setRequireApproval] = useState(false);
 
   useEffect(() => {
     startCamera();
@@ -79,17 +82,19 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, onClose }) => 
 
         const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
         setCapturedImage(dataUrl);
+        setRequireApproval(false); // Reset to default on new capture
       }
     }
   };
 
   const handleRetake = () => {
     setCapturedImage(null);
+    setRequireApproval(false);
   };
 
   const handleConfirm = () => {
     if (capturedImage) {
-      onCapture(capturedImage);
+      onCapture(capturedImage, requireApproval);
       stopCamera();
     }
   };
@@ -126,38 +131,72 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, onClose }) => 
       </div>
 
       {/* Controls */}
-      <div className="absolute bottom-0 w-full pb-12 pt-24 px-10 flex justify-around items-center bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-        {!capturedImage ? (
-          <button
-            onClick={takePhoto}
-            className="w-20 h-20 rounded-full border-[6px] border-white/30 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/30 transition-all active:scale-95 shadow-lg"
-            aria-label="Take Photo"
+      <div className="absolute bottom-0 w-full pb-12 pt-16 px-10 flex flex-col justify-end items-center bg-gradient-to-t from-black/90 via-black/50 to-transparent min-h-[250px]">
+        
+        {/* APPROVAL OPTION TOGGLE (Only visible after capture) */}
+        {capturedImage && (
+          <div 
+            onClick={() => setRequireApproval(!requireApproval)}
+            className={`mb-8 flex items-center gap-3 px-5 py-3 rounded-2xl cursor-pointer transition-all border ${
+              requireApproval 
+                ? 'bg-orange-500/20 border-orange-500 text-orange-200' 
+                : 'bg-white/10 border-white/20 text-white/80 hover:bg-white/20'
+            }`}
           >
-            <div className="w-16 h-16 bg-white rounded-full shadow-inner"></div>
-          </button>
-        ) : (
-          <>
-            <button
-              onClick={handleRetake}
-              className="flex flex-col items-center text-white space-y-2 group"
-            >
-              <div className="p-4 bg-gray-800 rounded-full group-hover:bg-gray-700 transition-colors border border-gray-700">
-                <RefreshCw size={24} />
-              </div>
-              <span className="text-xs font-medium tracking-wide uppercase">Retake</span>
-            </button>
-            
-            <button
-              onClick={handleConfirm}
-              className="flex flex-col items-center text-emerald-400 space-y-2 group"
-            >
-              <div className="p-5 bg-white rounded-full text-emerald-600 shadow-[0_0_20px_rgba(16,185,129,0.5)] group-hover:scale-105 transition-transform">
-                <Check size={32} strokeWidth={3} />
-              </div>
-              <span className="text-xs font-bold tracking-wide uppercase text-white">Post</span>
-            </button>
-          </>
+             <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${requireApproval ? 'bg-orange-500 border-orange-500' : 'border-gray-400'}`}>
+                {requireApproval && <Check size={14} className="text-white" />}
+             </div>
+             <div>
+                <p className="text-sm font-bold flex items-center gap-2">
+                  <ShieldCheck size={16} className={requireApproval ? "text-orange-400" : "text-gray-400"} />
+                  Yêu cầu xét duyệt (BTC)
+                </p>
+                <p className="text-[10px] opacity-70">Gửi ảnh lên timeline xét duyệt để kiểm tra</p>
+             </div>
+          </div>
         )}
+
+        <div className="flex justify-around items-center w-full">
+          {!capturedImage ? (
+            <button
+              onClick={takePhoto}
+              className="w-20 h-20 rounded-full border-[6px] border-white/30 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/30 transition-all active:scale-95 shadow-lg"
+              aria-label="Take Photo"
+            >
+              <div className="w-16 h-16 bg-white rounded-full shadow-inner"></div>
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={handleRetake}
+                className="flex flex-col items-center text-white space-y-2 group"
+              >
+                <div className="p-4 bg-gray-800 rounded-full group-hover:bg-gray-700 transition-colors border border-gray-700">
+                  <RefreshCw size={24} />
+                </div>
+                <span className="text-xs font-medium tracking-wide uppercase">Retake</span>
+              </button>
+              
+              <button
+                onClick={handleConfirm}
+                className={`flex flex-col items-center space-y-2 group ${requireApproval ? 'text-orange-400' : 'text-emerald-400'}`}
+              >
+                <div className={`p-5 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] group-hover:scale-105 transition-transform relative`}>
+                  {requireApproval ? (
+                     <ShieldCheck size={32} strokeWidth={2.5} className="text-orange-500" />
+                  ) : (
+                     <Check size={32} strokeWidth={3} className="text-emerald-600" />
+                  )}
+                  {/* Status Indicator Dot */}
+                  <div className={`absolute top-0 right-0 w-3 h-3 rounded-full border-2 border-white ${requireApproval ? 'bg-orange-500' : 'bg-emerald-500'}`}></div>
+                </div>
+                <span className="text-xs font-bold tracking-wide uppercase text-white">
+                   {requireApproval ? 'Gửi duyệt' : 'Đăng ngay'}
+                </span>
+              </button>
+            </>
+          )}
+        </div>
       </div>
       
       {/* Gamification Overlay */}

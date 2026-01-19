@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
 import { useApp } from '../services/appContext';
-import { Trophy, CheckCircle2, Clock, XCircle, Zap, X, Share2, Heart } from 'lucide-react';
-import { LocketItem } from '../types';
+import { Trophy, CheckCircle2, Clock, XCircle, Zap, X, Share2, Heart, Target } from 'lucide-react';
+import { LocketItem, ApprovalItem } from '../types';
 
 const ImpactTab: React.FC = () => {
   const { state, joinEvent } = useApp();
   const [subTab, setSubTab] = useState<'stats' | 'events'>('stats');
   const [selectedLocket, setSelectedLocket] = useState<LocketItem | null>(null);
 
-  // Mock data for Approval Timeline
-  const approvalTimeline = [
-    { id: 101, img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80', status: 'approved' },
-    { id: 102, img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&q=80', status: 'approved' },
-    { id: 103, img: 'https://images.unsplash.com/photo-1611273426761-53c8577a3dc7?w=400&q=80', status: 'rejected' },
-    { id: 104, img: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=400&q=80', status: 'pending' },
+  // Combine static mock data with dynamic approval queue
+  // In a real app, this would all come from the backend/state
+  const staticTimeline: ApprovalItem[] = [
+    { id: '101', img: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80', status: 'approved', timestamp: Date.now() - 86400000 },
+    { id: '102', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&q=80', status: 'approved', timestamp: Date.now() - 172800000 },
+    { id: '103', img: 'https://images.unsplash.com/photo-1611273426761-53c8577a3dc7?w=400&q=80', status: 'rejected', timestamp: Date.now() - 259200000 },
+    { id: '104', img: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=400&q=80', status: 'pending', timestamp: Date.now() - 300000 },
   ];
+
+  // Merge: Dynamic Queue First, then Static
+  const displayTimeline = [...(state.approvalQueue || []), ...staticTimeline];
 
   // Derived Stats
   const points = state.stats.points;
   const nextLevel = Math.ceil((points + 1) / 500) * 500;
   const progressPercent = Math.min(100, Math.max(5, (points / nextLevel) * 100));
+
+  // Daily Progress Calculation
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const dailyPoints = state.history
+    .filter(item => item.timestamp >= todayStart.getTime())
+    .reduce((acc, item) => acc + item.pointsEarned, 0);
+  const dailyGoal = 100;
+  const dailyProgressPercent = Math.min(100, (dailyPoints / dailyGoal) * 100);
 
   // Sort locket items by timestamp descending
   const sortedLocketItems = [...state.locketItems].sort((a, b) => b.timestamp - a.timestamp);
@@ -54,7 +67,35 @@ const ImpactTab: React.FC = () => {
         
         {subTab === 'stats' ? (
           <>
-            {/* 1. Green Locket Section */}
+            {/* 1. Daily Green Progress Section */}
+            <section className="bg-gradient-to-br from-emerald-50 to-white rounded-3xl p-4 shadow-[0_2px_12px_-4px_rgba(16,185,129,0.1)] border border-emerald-100">
+               <div className="flex justify-between items-end mb-2">
+                  <div>
+                     <h3 className="text-sm font-bold text-gray-900 flex items-center gap-1.5">
+                        <Target size={16} className="text-emerald-600" />
+                        Tiến độ green của ngày
+                     </h3>
+                  </div>
+                  <div className="text-right">
+                     <span className="text-lg font-extrabold text-emerald-600">{dailyPoints}</span>
+                     <span className="text-xs font-bold text-gray-400">/{dailyGoal}</span>
+                  </div>
+               </div>
+               
+               <div className="h-3 w-full bg-emerald-100/50 rounded-full overflow-hidden">
+                  <div 
+                     className="h-full bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.4)] transition-all duration-1000 ease-out relative"
+                     style={{ width: `${dailyProgressPercent}%` }}
+                  >
+                      <div className="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite]"></div>
+                  </div>
+               </div>
+               <p className="text-[10px] text-gray-400 font-medium mt-2 text-right italic">
+                  {dailyPoints >= dailyGoal ? "Đã hoàn thành mục tiêu hôm nay! 🎉" : "Cố gắng đạt 100 điểm nhé!"}
+               </p>
+            </section>
+
+            {/* 2. Green Locket Section */}
             <section className="bg-white rounded-3xl p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.05)] border border-emerald-50/50">
                <div className="mb-4 pl-1 border-l-4 border-purple-400">
                   <h2 className="text-lg font-bold text-gray-900 leading-none ml-2">Green Locket</h2>
@@ -86,7 +127,7 @@ const ImpactTab: React.FC = () => {
                </div>
             </section>
 
-            {/* 2. Stats Grid (2x2) */}
+            {/* 3. Stats Grid (2x2) */}
             <section className="grid grid-cols-2 gap-3">
                {/* Points Card */}
                <div className="bg-white p-4 rounded-3xl border border-gray-100 shadow-sm flex flex-col justify-between h-28">
@@ -125,7 +166,7 @@ const ImpactTab: React.FC = () => {
                </div>
             </section>
 
-            {/* 3. DRL Progress Bar Card */}
+            {/* 4. DRL Progress Bar Card */}
             <section className="bg-[#047857] rounded-3xl p-5 shadow-lg shadow-emerald-200/50 relative overflow-hidden">
                {/* Background Decor */}
                <div className="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
@@ -149,7 +190,7 @@ const ImpactTab: React.FC = () => {
                </div>
             </section>
 
-            {/* 4. Approval Timeline */}
+            {/* 5. Approval Timeline */}
             <section className="bg-white rounded-3xl p-5 shadow-[0_4px_20px_-8px_rgba(0,0,0,0.05)] border border-gray-100">
                <div className="mb-4 pl-1 border-l-4 border-orange-400">
                   <h2 className="text-lg font-bold text-gray-900 leading-none ml-2">Timeline xét duyệt</h2>
@@ -157,7 +198,7 @@ const ImpactTab: React.FC = () => {
                </div>
 
                <div className="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
-                  {approvalTimeline.map((item) => (
+                  {displayTimeline.map((item) => (
                     <div key={item.id} className="relative flex-shrink-0 w-24">
                         <div className="aspect-square rounded-2xl overflow-hidden border border-gray-100 bg-gray-50">
                            <img src={item.img} alt="proof" className={`w-full h-full object-cover ${item.status === 'rejected' ? 'grayscale opacity-70' : ''}`} />

@@ -1,5 +1,7 @@
 import { UserProfile, ClassSession, CampusEvent, TodoItem, LocketItem } from './types';
 
+export const FTU_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Logo_Truong_Dai_hoc_Ngoai_thuong.png/600px-Logo_Truong_Dai_hoc_Ngoai_thuong.png";
+
 export const INITIAL_USER: UserProfile = {
   id: 'u123',
   name: 'Nguyen Van A',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppProvider } from './services/appContext';
 import { Tab } from './types';
 import BottomNav from './components/BottomNav';
@@ -7,22 +7,27 @@ import ScheduleTab from './views/ScheduleTab';
 import TodoTab from './views/TodoTab';
 import ImpactTab from './views/ImpactTab';
 import ProfileTab from './views/ProfileTab';
+import LoadingScreen from './components/LoadingScreen';
 import { useApp } from './services/appContext';
 
 // Inner component to use the hook
 const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.SCHEDULE);
   const [showCamera, setShowCamera] = useState(false);
-  const { addCheckIn, addLocketItem } = useApp();
+  const { addCheckIn, addLocketItem, addApprovalItem } = useApp();
 
-  const handleCameraCapture = (imageSrc: string) => {
-    // 1. Add points and history
-    addCheckIn(imageSrc);
-    // 2. Add to Green Locket Feed
-    addLocketItem(imageSrc);
+  const handleCameraCapture = (imageSrc: string, requireApproval: boolean) => {
+    if (requireApproval) {
+       // Option 1: Approval Mode
+       addApprovalItem(imageSrc);
+    } else {
+       // Option 2: Standard Mode
+       addCheckIn(imageSrc);
+       addLocketItem(imageSrc);
+    }
     
     setShowCamera(false);
-    setActiveTab(Tab.IMPACT); // Redirect to stats to show the points and new locket item
+    setActiveTab(Tab.IMPACT); 
   };
 
   const renderTab = () => {
@@ -75,6 +80,12 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  }
+
   return (
     <AppProvider>
       <AppContent />

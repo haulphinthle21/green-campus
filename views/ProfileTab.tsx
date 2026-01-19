@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../services/appContext';
-import { User, GraduationCap, Calendar } from 'lucide-react';
+import { User, GraduationCap, Calendar, LogOut } from 'lucide-react';
 import GamificationBanner from '../components/GamificationBanner';
 
 const ProfileTab: React.FC = () => {
@@ -119,27 +119,26 @@ const ProfileTab: React.FC = () => {
                 <h3 className="font-bold text-xs text-gray-800">Thông tin khóa học</h3>
             </div>
             
-            <div className="space-y-2 mb-6 border-b border-gray-50 pb-4">
+            <div className="space-y-2 mb-2">
                 <InfoRow label="Lớp" value={profileData.classId} />
                 <InfoRow label="Ngành" value={profileData.major} alignTop />
                 <InfoRow label="Khoa" value={profileData.faculty} />
                 <InfoRow label="Bậc hệ đào tạo" value={profileData.level} />
                 <InfoRow label="Niên khóa" value={profileData.period} />
             </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 gap-3">
-                <button className="py-2.5 bg-[#ECFDF5] text-emerald-700 font-bold text-xs rounded-lg hover:bg-emerald-100 transition-colors border border-emerald-100">
-                   Chỉnh hồ sơ
-                </button>
-                <button 
-                  onClick={resetData}
-                  className="py-2.5 bg-[#059669] text-white font-bold text-xs rounded-lg hover:bg-[#047857] transition-colors shadow-md shadow-emerald-200/50"
-                >
-                   Thiết lập xanh
-                </button>
-            </div>
          </div>
+
+         {/* Logout Button */}
+         <div className="pt-2">
+             <button 
+               onClick={resetData}
+               className="w-full py-3 bg-red-50 text-red-500 font-bold text-xs rounded-xl hover:bg-red-100 transition-colors border border-red-100 shadow-sm flex items-center justify-center gap-2"
+             >
+                <LogOut size={16} />
+                Đăng xuất
+             </button>
+         </div>
+
       </div>
     </div>
   );

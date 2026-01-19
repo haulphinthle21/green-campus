@@ -66,6 +66,13 @@ export interface LocketItem {
   caption?: string;
 }
 
+export interface ApprovalItem {
+  id: string;
+  img: string;
+  status: 'pending' | 'approved' | 'rejected';
+  timestamp: number;
+}
+
 export interface AppState {
   user: UserProfile;
   stats: {
@@ -78,4 +85,5 @@ export interface AppState {
   todos: TodoItem[];
   events: CampusEvent[];
   locketItems: LocketItem[];
+  approvalQueue: ApprovalItem[];
 }

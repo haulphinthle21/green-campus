@@ -1,15 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AppState, UserProfile, ClassSession, TodoItem, CheckIn, CampusEvent, LocketItem } from '../types';
+import { AppState, UserProfile, ClassSession, TodoItem, CheckIn, CampusEvent, LocketItem, ApprovalItem } from '../types';
 import { INITIAL_USER, INITIAL_CLASSES, INITIAL_TODOS, INITIAL_EVENTS, INITIAL_LOCKET_ITEMS } from '../constants';
 
 interface AppContextType {
   state: AppState;
   selectClass: (classId: string | null) => void;
   toggleTodo: (todoId: string) => void;
-  addTodo: (text: string, courseCode: string) => void;
+  addTodo: (text: string, courseCode: string, isGreen?: boolean) => void;
   joinEvent: (eventId: string) => void;
   addCheckIn: (photoUrl: string) => void;
   addLocketItem: (photoUrl: string) => void;
+  addApprovalItem: (photoUrl: string) => void;
   getClassesForDay: (day: string) => ClassSession[];
   getNextSession: (courseCode: string) => ClassSession | undefined;
   resetData: () => void;
@@ -36,7 +37,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       history: [],
       todos: INITIAL_TODOS,
       events: INITIAL_EVENTS,
-      locketItems: INITIAL_LOCKET_ITEMS
+      locketItems: INITIAL_LOCKET_ITEMS,
+      approvalQueue: []
     };
   });
 
@@ -58,13 +60,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   };
 
-  const addTodo = (text: string, courseCode: string) => {
+  const addTodo = (text: string, courseCode: string, isGreen: boolean = false) => {
     const newTodo: TodoItem = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + Math.random().toString(), // Ensure unique ID even if called rapidly
       courseCode,
       text,
       isCompleted: false,
-      isGreenTask: false
+      isGreenTask: isGreen
     };
     setState(prev => ({ ...prev, todos: [newTodo, ...prev.todos] })); // Add to top
   };
@@ -116,6 +118,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }));
   };
 
+  const addApprovalItem = (photoUrl: string) => {
+    const newItem: ApprovalItem = {
+      id: Date.now().toString(),
+      img: photoUrl,
+      status: 'pending',
+      timestamp: Date.now()
+    };
+    // Ensure approvalQueue exists (for legacy state migration)
+    const currentQueue = state.approvalQueue || [];
+    setState(prev => ({
+      ...prev,
+      approvalQueue: [newItem, ...currentQueue]
+    }));
+  };
+
   const getClassesForDay = (day: string) => {
     return INITIAL_CLASSES.filter(c => c.day === day);
   };
@@ -145,6 +162,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       joinEvent, 
       addCheckIn,
       addLocketItem,
+      addApprovalItem,
       getClassesForDay,
       getNextSession,
       resetData
