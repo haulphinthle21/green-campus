@@ -73,11 +73,12 @@ const ProfileTab: React.FC = () => {
             
             <div className="flex gap-4 mb-4">
                 {/* Avatar Box */}
-                <div className="w-20 h-24 bg-[#F0FDF9] rounded-xl flex flex-col items-center justify-center border border-emerald-100 shrink-0">
-                   <div className="w-8 h-8 flex items-center justify-center mb-1">
-                      <GraduationCap size={24} className="text-emerald-800" />
-                   </div>
-                   <div className="h-0.5 w-6 bg-emerald-200 rounded-full mt-2"></div>
+                <div className="w-20 h-24 bg-[#F0FDF9] rounded-xl flex flex-col items-center justify-center border border-emerald-100 shrink-0 overflow-hidden">
+                   <img 
+                     src="https://lh3.googleusercontent.com/pw/AP1GczNRWsNt0DfhGu6m4S9ONz6o2EIoU9uky3TkcCpqDkkZeBe5pN0ZpXjNY69_8npYJffbLQfZuBXI-lSoAFGC2yFxr8ClQFXNzbUZSg2pjTEeaW-8ti7LpQMNpiRVe_90R2U2k6ebeNbNReLoD3HPJQwq=w317-h353-s-no-gm?authuser=0" 
+                     alt="Profile"
+                     className="w-full h-full object-cover"
+                   />
                 </div>
 
                 {/* Basic Info Grid */}
