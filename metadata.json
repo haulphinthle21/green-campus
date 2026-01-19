@@ -1,0 +1,7 @@
+{
+  "name": "FTU Green Campus Companion",
+  "description": "A gamified student companion app for Foreign Trade University focused on sustainability, schedule management, and community impact.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
