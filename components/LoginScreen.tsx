@@ -21,77 +21,89 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#FAF9FE] flex flex-col items-center justify-center p-6 animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-50 bg-[#FAF9FE] flex flex-col animate-in fade-in duration-300 overflow-y-auto no-scrollbar">
       
-      {/* Logo Container */}
-      <div className="mb-6 flex flex-col items-center">
-        {/* Updated: Added overflow-hidden, removed overflow-visible, set object-cover */}
-        <div className="w-40 h-40 rounded-full bg-emerald-50/50 flex items-center justify-center mb-4 relative border-4 border-emerald-50 overflow-hidden shadow-lg shadow-emerald-100/50">
-            {/* Using the constant logo with cover fit */}
-            <img 
-              src={FTU_LOGO_URL} 
-              alt="FTU Logo" 
-              className="w-full h-full object-cover"
-            />
+      {/* Main Content Container - Centers vertically in available space */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 w-full min-h-[500px]">
+        
+        {/* Logo Container */}
+        <div className="mb-8 flex flex-col items-center">
+            {/* Updated: Added overflow-hidden, removed overflow-visible, set object-cover */}
+            <div className="w-40 h-40 rounded-full bg-emerald-50/50 flex items-center justify-center mb-5 relative border-4 border-emerald-50 overflow-hidden shadow-lg shadow-emerald-100/50">
+                {/* Using the constant logo with cover fit */}
+                <img 
+                  src={FTU_LOGO_URL} 
+                  alt="FTU Logo" 
+                  className="w-full h-full object-cover"
+                />
+            </div>
+            <h1 className="text-xl font-extrabold text-emerald-900 tracking-wide uppercase mt-2 text-center">
+              FTU2 GREEN CAMPUS
+            </h1>
         </div>
-        <h1 className="text-xl font-extrabold text-emerald-900 tracking-wide uppercase mt-2">
-          FTU2 GREEN CAMPUS
-        </h1>
+
+        {/* Form Section */}
+        <form onSubmit={handleLogin} className="w-full max-w-xs space-y-4">
+          
+          {/* Student ID Input */}
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <User size={20} className="text-emerald-600 font-bold" fill="currentColor" fillOpacity={0.2} />
+            </div>
+            <input
+              type="text"
+              value={studentId}
+              onChange={(e) => setStudentId(e.target.value)}
+              placeholder="Mã sinh viên"
+              className="w-full bg-[#F2F0F0] text-gray-800 font-bold placeholder-gray-500 text-sm rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all border border-transparent focus:border-emerald-200"
+            />
+          </div>
+
+          {/* Password Input */}
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <MoreHorizontal size={20} className="text-emerald-600 font-bold" />
+            </div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mật khẩu"
+              className="w-full bg-[#F2F0F0] text-gray-800 font-bold placeholder-gray-500 text-sm rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all border border-transparent focus:border-emerald-200"
+            />
+          </div>
+
+          {/* Spacer */}
+          <div className="h-4"></div>
+
+          {/* Buttons */}
+          <div className="space-y-3">
+            <button
+              type="submit"
+              className="w-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-sm py-3.5 rounded-full shadow-lg shadow-emerald-200 active:scale-[0.98] transition-all tracking-wide uppercase"
+            >
+              Đăng nhập
+            </button>
+
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              className="w-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-sm py-3.5 rounded-full shadow-lg shadow-emerald-200 active:scale-[0.98] transition-all tracking-wide uppercase"
+            >
+              Quên mật khẩu
+            </button>
+          </div>
+
+        </form>
       </div>
 
-      {/* Form Section */}
-      <form onSubmit={handleLogin} className="w-full max-w-xs space-y-4">
-        
-        {/* Student ID Input */}
-        <div className="relative group">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <User size={20} className="text-emerald-600 font-bold" fill="currentColor" fillOpacity={0.2} />
-          </div>
-          <input
-            type="text"
-            value={studentId}
-            onChange={(e) => setStudentId(e.target.value)}
-            placeholder="Mã sinh viên"
-            className="w-full bg-[#F2F0F0] text-gray-800 font-bold placeholder-gray-500 text-sm rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all border border-transparent focus:border-emerald-200"
-          />
-        </div>
+      {/* Footer Credit - Now in normal flow, pushed to bottom with padding */}
+      <div className="w-full text-center pb-6 pt-2 shrink-0">
+         <p className="text-[10px] text-gray-400 font-medium opacity-60 tracking-wide">
+           - A System Design Prototype by Lê Thành Nguyên -
+         </p>
+      </div>
 
-        {/* Password Input */}
-        <div className="relative group">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <MoreHorizontal size={20} className="text-emerald-600 font-bold" />
-          </div>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Mật khẩu"
-            className="w-full bg-[#F2F0F0] text-gray-800 font-bold placeholder-gray-500 text-sm rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all border border-transparent focus:border-emerald-200"
-          />
-        </div>
-
-        {/* Spacer */}
-        <div className="h-4"></div>
-
-        {/* Buttons */}
-        <div className="space-y-3">
-          <button
-            type="submit"
-            className="w-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-sm py-3.5 rounded-full shadow-lg shadow-emerald-200 active:scale-[0.98] transition-all tracking-wide uppercase"
-          >
-            Đăng nhập
-          </button>
-
-          <button
-            type="button"
-            onClick={handleForgotPassword}
-            className="w-full bg-[#059669] hover:bg-[#047857] text-white font-extrabold text-sm py-3.5 rounded-full shadow-lg shadow-emerald-200 active:scale-[0.98] transition-all tracking-wide uppercase"
-          >
-            Quên mật khẩu
-          </button>
-        </div>
-
-      </form>
     </div>
   );
 };
