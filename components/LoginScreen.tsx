@@ -100,7 +100,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       {/* Footer Credit - Now in normal flow, pushed to bottom with padding */}
       <div className="w-full text-center pb-6 pt-2 shrink-0">
          <p className="text-[10px] text-gray-400 font-medium opacity-60 tracking-wide">
-           - A System Design Prototype by Lê Thành Nguyên -
+           - A Design Thinking Prototype Made by Lê Thành Nguyên -
          </p>
       </div>
 
